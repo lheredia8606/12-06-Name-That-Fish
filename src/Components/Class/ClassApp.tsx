@@ -15,7 +15,7 @@ export class ClassApp extends Component {
           <ClassScoreBoard />
           <ClassGameBoard />
         </>
-        {false && <ClassFinalScore />}
+        {true && <ClassFinalScore />}
       </>
     );
   }
