@@ -1,37 +1,49 @@
-import { Component } from "react";
+import { Fish } from "../../types-and-interfaces/types-and-interfaces";
 import "./styles/game-board.css";
-import { Images } from "../../assets/Images";
+import { Component } from "react";
 
-const initialFishes = [
-  {
-    name: "trout",
-    url: Images.trout,
-  },
-  {
-    name: "salmon",
-    url: Images.salmon,
-  },
-  {
-    name: "tuna",
-    url: Images.tuna,
-  },
-  {
-    name: "shark",
-    url: Images.shark,
-  },
-];
+interface ClassGameBoardProps {
+  incrementIncorrectCount: () => void;
+  incrementCorrectCount: () => void;
+  nextFishToName: Fish;
+}
 
-export class ClassGameBoard extends Component {
+export class ClassGameBoard extends Component<ClassGameBoardProps> {
+  state = {
+    fishNameInput: "",
+  };
+
   render() {
-    const nextFishToName = initialFishes[0];
+    const { incrementCorrectCount, nextFishToName, incrementIncorrectCount } =
+      this.props;
     return (
       <div id="game-board">
         <div id="fish-container">
           <img src={nextFishToName.url} alt={nextFishToName.name} />
         </div>
-        <form id="fish-guess-form">
+        <form
+          id="fish-guess-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (
+              this.state.fishNameInput.toLowerCase() === nextFishToName.name
+            ) {
+              incrementCorrectCount();
+            } else {
+              incrementIncorrectCount();
+            }
+            this.setState({ fishNameInput: "" });
+          }}
+        >
           <label htmlFor="fish-guess">What kind of fish is this?</label>
-          <input type="text" name="fish-guess" />
+          <input
+            type="text"
+            name="fish-guess"
+            value={this.state.fishNameInput}
+            onChange={(e) => {
+              this.setState({ fishNameInput: e.target.value });
+            }}
+          />
           <input type="submit" />
         </form>
       </div>

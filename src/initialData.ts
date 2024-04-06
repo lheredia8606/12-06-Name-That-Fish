@@ -1,5 +1,5 @@
 import { Images } from "./assets/Images";
-import { Fish } from "./types/types";
+import { Fish } from "./types-and-interfaces/types-and-interfaces";
 
 export const initialFishes: Fish[] = [
   {

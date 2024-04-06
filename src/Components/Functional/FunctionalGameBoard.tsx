@@ -1,4 +1,4 @@
-import { Fish } from "../../types/types";
+import { Fish } from "../../types-and-interfaces/types-and-interfaces";
 import "./styles/game-board.css";
 import { useState } from "react";
 

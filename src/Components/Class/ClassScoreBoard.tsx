@@ -1,11 +1,15 @@
 import { Component } from "react";
 import "./styles/score-board.css";
+import { CurrentResult } from "../../types-and-interfaces/types-and-interfaces";
+//  Where the score is presented
 
-const incorrectCount = 0;
-const correctCount = 0;
-const answersLeft = ["trout", "salmon", "tuna", "shark"];
-export class ClassScoreBoard extends Component {
+const possibleAnswers = ["trout", "salmon", "tuna", "shark"];
+
+export class ClassScoreBoard extends Component<CurrentResult> {
   render() {
+    const { incorrectCount, correctCount } = this.props;
+    const answersLeft = possibleAnswers.slice(incorrectCount + correctCount);
+
     return (
       <div id="score-board">
         <div>Incorrect 🔻: {incorrectCount}</div>

@@ -4,3 +4,8 @@ export type Fish = {
   name: string;
   url: string;
 };
+
+export interface CurrentResult {
+  incorrectCount: number;
+  correctCount: number;
+}
