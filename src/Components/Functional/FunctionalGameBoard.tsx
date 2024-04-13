@@ -3,12 +3,10 @@ import "./styles/game-board.css";
 import { useState } from "react";
 
 export function FunctionalGameBoard({
-  incrementIncorrectCount,
-  incrementCorrectCount,
+  handleProperStateIncrement,
   nextFishToName,
 }: {
-  incrementIncorrectCount: () => void;
-  incrementCorrectCount: () => void;
+  handleProperStateIncrement: (answer: string) => void;
   nextFishToName: Fish;
 }) {
   const [fishNameInput, setFishNameInput] = useState("");
@@ -21,11 +19,7 @@ export function FunctionalGameBoard({
         id="fish-guess-form"
         onSubmit={(e) => {
           e.preventDefault();
-          if (fishNameInput.toLowerCase() === nextFishToName.name) {
-            incrementCorrectCount();
-          } else {
-            incrementIncorrectCount();
-          }
+          handleProperStateIncrement(fishNameInput.toLowerCase());
           setFishNameInput("");
         }}
       >

@@ -1,10 +1,11 @@
 import { Component } from "react";
 import "./styles/final-score.css";
 import { CurrentResult } from "../../types-and-interfaces/types-and-interfaces";
+import { initialFishes } from "../../initialData";
 
 export class ClassFinalScore extends Component<CurrentResult> {
   render() {
-    const { correctCount, incorrectCount } = this.props;
+    const { correctCount } = this.props;
 
     return (
       <div id="final-score">
@@ -12,7 +13,7 @@ export class ClassFinalScore extends Component<CurrentResult> {
         <div id="score">
           <p>{correctCount}</p>
           <hr />
-          <p>{correctCount + incorrectCount}</p>
+          <p>{initialFishes.length}</p>
         </div>
       </div>
     );

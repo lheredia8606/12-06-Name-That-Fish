@@ -1,9 +1,10 @@
 import { Component } from "react";
 import "./styles/score-board.css";
 import { CurrentResult } from "../../types-and-interfaces/types-and-interfaces";
+import { initialFishes } from "../../initialData";
 //  Where the score is presented
 
-const possibleAnswers = ["trout", "salmon", "tuna", "shark"];
+const possibleAnswers = initialFishes.map((fish) => fish.name);
 
 export class ClassScoreBoard extends Component<CurrentResult> {
   render() {

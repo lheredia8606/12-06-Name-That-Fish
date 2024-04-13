@@ -10,30 +10,30 @@ export class ClassApp extends Component {
     incorrectCount: 0,
     correctCount: 0,
   };
+  handleProperStateIncrement = (answer: string): void => {
+    const currentFish = this.state.incorrectCount + this.state.correctCount;
+    answer === initialFishes[currentFish].name
+      ? this.setState({ correctCount: this.state.correctCount + 1 })
+      : this.setState({ incorrectCount: this.state.incorrectCount + 1 });
+  };
   render() {
-    const { incorrectCount, correctCount } = this.state;
-    const currentFish = incorrectCount + correctCount;
-    const incrementIncorrectCount = (): void => {
-      this.setState({ incorrectCount: incorrectCount + 1 });
-    };
-    const incrementCorrectCount = (): void => {
-      this.setState({ correctCount: correctCount + 1 });
-    };
-    const gameOver = incorrectCount + correctCount > 3;
+    const currentFish = this.state.incorrectCount + this.state.correctCount;
+    const { correctCount, incorrectCount } = this.state;
+    const gameOver = currentFish >= initialFishes.length;
     return (
       <>
-        {gameOver || (
-          <ClassScoreBoard
-            incorrectCount={incorrectCount}
-            correctCount={correctCount}
-          />
-        )}
-        {gameOver || (
-          <ClassGameBoard
-            incrementIncorrectCount={incrementIncorrectCount}
-            incrementCorrectCount={incrementCorrectCount}
-            nextFishToName={initialFishes[currentFish]}
-          />
+        {!gameOver && (
+          <>
+            <ClassScoreBoard
+              incorrectCount={this.state.incorrectCount}
+              correctCount={correctCount}
+            />
+
+            <ClassGameBoard
+              handleProperStateIncrement={this.handleProperStateIncrement}
+              nextFishToName={initialFishes[currentFish]}
+            />
+          </>
         )}
 
         {gameOver && (

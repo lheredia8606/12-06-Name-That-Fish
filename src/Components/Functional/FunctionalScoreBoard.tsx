@@ -1,7 +1,8 @@
+import { initialFishes } from "../../initialData";
 import "./styles/score-board.css";
 //  Where the score is presented
 
-const possibleAnswers = ["trout", "salmon", "tuna", "shark"];
+const possibleAnswers = initialFishes.map((fish) => fish.name);
 
 export function FunctionalScoreBoard({
   incorrectCount,

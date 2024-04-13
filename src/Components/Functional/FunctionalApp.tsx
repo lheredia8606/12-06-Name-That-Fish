@@ -9,34 +9,34 @@ export function FunctionalApp() {
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const currentFish = incorrectCount + correctCount;
-  const incrementIncorrectCount = (): void => {
-    setIncorrectCount(incorrectCount + 1);
+
+  const handleProperStateIncrement = (answer: string) => {
+    if (answer === initialFishes[currentFish].name) {
+      setCorrectCount(correctCount + 1);
+    } else {
+      setIncorrectCount(incorrectCount + 1);
+    }
   };
-  const incrementCorrectCount = (): void => {
-    setCorrectCount(correctCount + 1);
-  };
-  const gameOver = incorrectCount + correctCount > 3;
+  const gameOver = incorrectCount + correctCount >= initialFishes.length;
 
   return (
     <>
       {gameOver || (
-        <FunctionalScoreBoard
-          incorrectCount={incorrectCount}
-          correctCount={correctCount}
-        />
+        <>
+          <FunctionalScoreBoard
+            incorrectCount={incorrectCount}
+            correctCount={correctCount}
+          />
+          <FunctionalGameBoard
+            handleProperStateIncrement={handleProperStateIncrement}
+            nextFishToName={initialFishes[currentFish]}
+          />
+        </>
       )}
-      {gameOver || (
-        <FunctionalGameBoard
-          incrementIncorrectCount={incrementIncorrectCount}
-          incrementCorrectCount={incrementCorrectCount}
-          nextFishToName={initialFishes[currentFish]}
-        />
-      )}
-
       {gameOver && (
         <FunctionalFinalScore
           correctCount={correctCount}
-          totalCount={correctCount + incorrectCount}
+          totalCount={initialFishes.length}
         />
       )}
     </>

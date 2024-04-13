@@ -3,8 +3,7 @@ import "./styles/game-board.css";
 import { Component } from "react";
 
 interface ClassGameBoardProps {
-  incrementIncorrectCount: () => void;
-  incrementCorrectCount: () => void;
+  handleProperStateIncrement: (answer: string) => void;
   nextFishToName: Fish;
 }
 
@@ -14,8 +13,7 @@ export class ClassGameBoard extends Component<ClassGameBoardProps> {
   };
 
   render() {
-    const { incrementCorrectCount, nextFishToName, incrementIncorrectCount } =
-      this.props;
+    const { handleProperStateIncrement, nextFishToName } = this.props;
     return (
       <div id="game-board">
         <div id="fish-container">
@@ -25,13 +23,10 @@ export class ClassGameBoard extends Component<ClassGameBoardProps> {
           id="fish-guess-form"
           onSubmit={(e) => {
             e.preventDefault();
-            if (
-              this.state.fishNameInput.toLowerCase() === nextFishToName.name
-            ) {
-              incrementCorrectCount();
-            } else {
-              incrementIncorrectCount();
-            }
+            console.log(`handler called`);
+            handleProperStateIncrement(
+              this.state.fishNameInput.toLocaleLowerCase()
+            );
             this.setState({ fishNameInput: "" });
           }}
         >
